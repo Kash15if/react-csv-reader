@@ -2,8 +2,8 @@ import "./App.css";
 import { useState } from "react";
 
 function App() {
-  const [fileName, setFileName] = useState("");
-  const [file, setFile] = useState("");
+  // const [fileName, setFileName] = useState("");
+  // const [file, setFile] = useState("");
   const [columns, setColumns] = useState();
   const [data, setData] = useState();
 
@@ -24,37 +24,34 @@ function App() {
       const cols = dataRowWise.shift().replace(/['"]+/g, "").split(",");
       console.log(cols);
 
-      const importedData = dataRowWise.map((dataRow) =>
-        dataRow.split("s*,s*(?![^(]*))")
-      );
+      const importedData = dataRowWise.map((dataRow) => dataRow.split(","));
 
       console.log(importedData);
       setColumns(cols);
       setData(importedData);
-
-      // setFile(csv);
     };
   };
 
-  const onFileUpload = (e) => {
-    console.log(e);
+  // const onFileUpload = (e) => {
+  //   console.log(e);
 
-    // const csv = e.target.files[0];
+  // const csv = e.target.files[0];
 
-    // const reader = new FileReader();
+  // const reader = new FileReader();
 
-    // reader.readAsText(csv);
+  // reader.readAsText(csv);
 
-    // reader.onload = function (e) {
-    //   console.log(e.target);
-    // };
-  };
+  // reader.onload = function (e) {
+  //   console.log(e.target);
+  // };
+  // };
 
   return (
     <div className="App">
       <input type="file" onChange={onFileChange} />
-      <button onClick={onFileUpload}>Upload!</button>
+      {/* <button onClick={onFileUpload}>Upload!</button> */}
 
+      {/* Bootstrap Table */}
       <div>
         {data && columns && (
           <table class="table">
