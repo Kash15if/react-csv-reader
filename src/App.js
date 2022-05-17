@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState } from "react";
+const csv = require("csvtojson");
 
 function App() {
   // const [fileName, setFileName] = useState("");
@@ -19,12 +20,17 @@ function App() {
     reader.onload = function (e) {
       const csv = e.target.result;
 
-      const dataRowWise = csv.split("\n");
+      const dataRowWise = csv.toString().split("\r");
 
       const cols = dataRowWise.shift().replace(/['"]+/g, "").split(",");
       console.log(cols);
 
-      const importedData = dataRowWise.map((dataRow) => dataRow.split(","));
+      const importedData = dataRowWise.map((dataRow) => {
+        console.log(dataRow);
+        return dataRow
+          .replace(/^\(\)\{\}\[\],"':;+/g, "")
+          .split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+      });
 
       console.log(importedData);
       setColumns(cols);
